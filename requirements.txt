@@ -1,6 +1,0 @@
-adafruit-blinka
-adafruit-circuitpython-mlx90640
-opencv-python-headless
-numpy
-requests
-RPi.GPIO
