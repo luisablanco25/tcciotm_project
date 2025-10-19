@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: tcciotm
+Version: 0.1.0
+Summary: Toolkit IoT-M para RPi e PC
+Requires-Python: >=3.9
+Requires-Dist: requests>=2.31.0
+Requires-Dist: opencv-python>=4.9.0

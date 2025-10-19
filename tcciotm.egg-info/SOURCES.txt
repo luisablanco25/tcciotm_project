@@ -1,0 +1,17 @@
+pyproject.toml
+examples/pc_receber_termal.py
+examples/pc_stt_servidor.py
+examples/teste_envio_mensagem.py
+examples/teste_geo.py
+examples/teste_rgb_path.py
+tcciotm/__init__.py
+tcciotm/config.py
+tcciotm/geo.py
+tcciotm/media.py
+tcciotm/stt.py
+tcciotm/telegram_utils.py
+tcciotm.egg-info/PKG-INFO
+tcciotm.egg-info/SOURCES.txt
+tcciotm.egg-info/dependency_links.txt
+tcciotm.egg-info/requires.txt
+tcciotm.egg-info/top_level.txt

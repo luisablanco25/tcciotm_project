@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tcciotm"
+version = "0.1.0"
+description = "Toolkit IoT-M para RPi e PC"
+requires-python = ">=3.9"
+dependencies = [
+  "requests>=2.31.0",
+  "opencv-python>=4.9.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
