@@ -1,4 +1,13 @@
 # ASCII only
+"""Servidor Flask para transcrição automática de áudio com Whisper.
+
+Este módulo implementa uma API REST simples com dois endpoints:
+- `/health`: Verificação de integridade do serviço.
+- `/stt`: Recebe um arquivo de áudio, transcreve usando `faster_whisper` e envia o texto via `tcciotm.send_message`.
+
+O modelo Whisper utilizado é definido pela variável de ambiente `TCCIOTM_STT_MODEL`.
+"""
+
 from flask import Flask, request, jsonify
 from faster_whisper import WhisperModel
 import tempfile, os, time
@@ -13,10 +22,26 @@ model = WhisperModel(MODEL_NAME, device="cpu", compute_type="int8")
 
 @app.route("/health", methods=["GET"])
 def health():
+    """Endpoint de verificação de integridade do serviço.
+
+    Returns:
+        tuple: JSON com `{"status": "ok"}` e código HTTP 200.
+    """
     return jsonify({"status": "ok"}), 200
 
 @app.route("/stt", methods=["POST"])
 def stt():
+    """Endpoint principal para transcrição de áudio.
+
+    Recebe um arquivo de áudio via POST (campo `audio`), salva temporariamente,
+    processa com o modelo Whisper e retorna o texto transcrito.
+
+    Além disso, envia a transcrição diretamente ao Telegram via `send_message`.
+
+    Returns:
+        tuple: JSON contendo o texto transcrito (`"text"`) e a duração estimada (`"duration"`).
+        Em caso de erro, retorna JSON com `"error"` e o respectivo código HTTP.
+    """
     try:
         if "audio" not in request.files:
             return jsonify({"error": "no file 'audio'"}), 400
@@ -52,4 +77,9 @@ def stt():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
+    """Ponto de entrada principal do servidor Flask.
+
+    Executa o app na porta 5000, ouvindo em todas as interfaces (0.0.0.0),
+    com modo `debug` desativado.
+    """
     app.run(host="0.0.0.0", port=5000, debug=False)
